@@ -1,5 +1,5 @@
 #compiled python 
-source/*.pyc
-source/cms/*.pyc
+*.pyc
 ml/sklearn/20news-bydate-test/
 ml/sklearn/20news-bydate-train/
+ml/.idea
