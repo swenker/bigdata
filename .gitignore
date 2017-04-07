@@ -1,0 +1,5 @@
+#compiled python 
+source/*.pyc
+source/cms/*.pyc
+ml/sklearn/20news-bydate-test/
+ml/sklearn/20news-bydate-train/

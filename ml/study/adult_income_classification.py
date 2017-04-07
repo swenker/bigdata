@@ -160,7 +160,7 @@ def test_it():
 
 # test_it()
 
-import decision_tree
+# import decision_tree
 
 class Classifier():
     def kNNClassifier(self, inX, knownDataSet, knownLabels, k):
@@ -328,6 +328,6 @@ def test_classifier():
     test_bayes()
     # test_usage()
 
-
-test_classifier()
+if __name__=='__main__':
+    test_classifier()
 
