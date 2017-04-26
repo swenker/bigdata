@@ -71,11 +71,19 @@ def cluster_kmeans():
     print X[:,-1]
     # print array(real_labels)
 
+def normalize_test():
+    X=[1,2,3,4,5,2,6,8]
+    from sklearn.preprocessing import Normalizer
+    normalizer = Normalizer()
+    X2 = normalizer.fit_transform(X)
+
+    print X2
 
 def testit():
     # kNN()
     # cluster_kmeans()
-    cluster_kmeans_simple()
+    # cluster_kmeans_simple()
+    normalize_test()
 
 if __name__ == "__main__":
     testit()
