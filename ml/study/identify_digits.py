@@ -9,16 +9,21 @@ def train_scanner():
     training_image_path = image_dir+'digits-training-1.png'
     training_image_path = image_dir+'digits-training-2.png'
     training_image_path = image_dir+'digits-training-3.png'
+    training_image_path = image_dir+'idcard_back.jpg'
+    training_image_path = image_dir+'idcard_back_02.jpg'
+    # training_image_path = image_dir+'digits-training-written-camera-1.jpg'
     im = cv2.imread(training_image_path)
     im3 = im.copy()
 
     gray = cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
+
     blur = cv2.GaussianBlur(gray,(5,5),0)
     thresh = cv2.adaptiveThreshold(blur,255,1,1,11,2)
-
+    ret,thresh=cv2.threshold(gray,127,255,0)
     #################      Now finding Contours         ###################
 
-    contours,hierarchy = cv2.findContours(thresh,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+    # contours,hierarchy = cv2.findContours(thresh,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
+    contours,hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
 
     samples =  np.empty((0,100))
@@ -29,8 +34,10 @@ def train_scanner():
         # print (cv2.contourArea(cnt))
         if cv2.contourArea(cnt)>50:
             [x,y,w,h] = cv2.boundingRect(cnt)
-            print ("h=%d" %h)
-            if  h>50:
+            print ("w=%d,h=%d" %(w,h))
+
+            #Need to adjust based on real data ?
+            if  h>15 and w >9 :
                 cv2.rectangle(im,(x,y),(x+w,y+h),(0,0,255),2)
                 roi = thresh[y:y+h,x:x+w]
                 roismall = cv2.resize(roi,(10,10))
